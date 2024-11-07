@@ -1,5 +1,5 @@
 terraform {
-  source = "${get_parent_terragrunt_dir()}/../_modules/vpc"
+  source = "${get_parent_terragrunt_dir()}/../_modules/ecr"
 }
 
 include "root" {
@@ -16,10 +16,6 @@ locals {
 
 inputs = {
   env             = local.global_environment_vars.locals.environment  
-  vpc_name        = "wordpress"
-  cidr_block      = "10.0.0.0/16"
-  azs             = ["us-east-1a", "us-east-1b"]
-  public_subnets  = ["10.0.10.0/24", "10.0.11.0/24"]
-  private_subnets = ["10.0.20.0/24", "10.0.21.0/24"]
-  enable_nat_gateway = false
+  repository_name        = "wordpress"
+
 }
