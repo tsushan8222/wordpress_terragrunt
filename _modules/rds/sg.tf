@@ -2,6 +2,7 @@
 resource "aws_security_group" "rds_sg" {
   name        = "rds-sg"
   description = "Allow MySQL inbound traffic"
+  #vpc_id      = "vpc-03dbdb57a199b5eff"
   vpc_id      = var.vpc_id
 
   ingress {

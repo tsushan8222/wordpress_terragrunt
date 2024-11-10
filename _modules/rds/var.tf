@@ -2,6 +2,7 @@
 variable "vpc_id" {
   description = "VPC ID where the RDS instance will be launched"
   type        = string
+#  default     = "vpc-03dbdb57a199b5eff"
 }
 
 variable "private_subnets" {
@@ -76,4 +77,27 @@ variable "db_parameter_group_name" {
 variable "env" {
   description = "The environment tag for the RDS instance"
   type        = string
+}
+
+variable "allowed_cidr_blocks" {
+  description = "VPC Allowed CIDR Blocks"
+  type        = list(string)
+}
+
+variable "name_prefix" {
+  description = "Prefix for RDS resources"
+  type        = string
+  default     = "wordpress" # Ensure this only has lowercase letters, numbers, and hyphens
+}
+
+variable "major_engine_version" {
+  description = "Major version of the DB engine (e.g., 8.0 for MySQL)"
+  type        = string
+  default     = "8.0"
+}
+
+variable "family" {
+  description = "The family of the DB parameter group (e.g., mysql8.0 for MySQL 8.0)"
+  type        = string
+  default     = "mysql8.0"
 }
