@@ -37,5 +37,6 @@ inputs = {
   public_subnets  = dependency.wordpress_vpc.outputs.public_subnet_ids
   private_subnets = dependency.wordpress_vpc.outputs.private_subnet_ids
   secret     = "arn:aws:secretsmanager:us-east-1:156041424049:secret:wordpress-A1Ctec"
+  ssl_certificate_arn = "arn:aws:acm:us-east-1:156041424049:certificate/02767e48-c358-4fbd-80d5-9345df46abc1"
 
 }

@@ -6,7 +6,12 @@ variable "env" {
 
 variable "vpc_id" {
   type        = string
-  description = "Env Name"
+  description = "VPC id"
+}
+
+variable "ssl_certificate_arn" {
+  type        = string
+  description = "ssl_certificate_arn"
 }
 
 variable "cluster_name" {

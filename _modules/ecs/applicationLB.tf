@@ -16,10 +16,20 @@ resource "aws_lb_listener" "http" {
   port              = 80
   protocol          = "HTTP"
 
+  # HTTP redirect to HTTPS
   default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.example.arn
+    type = "redirect"
+    redirect {
+      protocol = "HTTPS"
+      port     = "443"
+      status_code = "HTTP_301"
+    }
   }
+
+  # default_action {
+  #   type             = "forward"
+  #   target_group_arn = aws_lb_target_group.example.arn
+  # }
 }
 
 
@@ -37,6 +47,20 @@ resource "aws_lb_target_group" "example" {
     healthy_threshold   = 2
     unhealthy_threshold = 2
     matcher             = "200"
+  }
+}
+
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.example.arn
+  port              = 443
+  protocol          = "HTTPS"
+
+  ssl_policy        = "ELBSecurityPolicy-2016-08" # Choose your SSL policy here
+  certificate_arn   = var.ssl_certificate_arn # Provide the ARN of your SSL certificate
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.example.arn
   }
 }
 
