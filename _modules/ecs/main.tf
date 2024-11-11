@@ -38,6 +38,9 @@ module "ecs" {
         cpu_architecture       = "ARM64"
         operating_system_family = "LINUX"
       }
+      
+      enable_execute_command   = true
+
 
       container_definitions = {
 
@@ -80,7 +83,7 @@ module "ecs" {
               value = local.wordpress_secret["WORDPRESS_DB_USER"]
             },
             {
-              name  = "DB_PASSWORD"
+              name  = "WORDPRESS_DB_PASSWORD"
               value = local.wordpress_secret["WORDPRESS_DB_PASSWORD"]
             }
           ]
@@ -187,7 +190,8 @@ module "ecs" {
 
 # Fetch the secret from AWS Secrets Manager
 data "aws_secretsmanager_secret" "wordpress_secret" {
-  secret_id = var.secret
+  name = var.secret
+#   secret_id = "arn:aws:secretsmanager:us-east-1:156041424049:secret:wordpress-A1Ctec"
 }
 
 # Retrieve the version of the secret
